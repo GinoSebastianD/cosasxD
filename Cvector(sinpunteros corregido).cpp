@@ -49,6 +49,8 @@ void CVector::push_back(int x)
     if (nelem==size)
     {
         expand(0);
+        v[nelem]=x;
+        return;
     }
     v[nelem] = x;
     nelem++;
@@ -60,7 +62,8 @@ void CVector::push_front(int x)
     {
         expand(1);
          v[0] = x;
-         return;
+         
+         return ;
     }
     for (int i = nelem; i > 0; i--)
     {
@@ -110,7 +113,7 @@ int main() {
     vec.push_back(3);
     vec.push_back(4);
     vec.push_back(5);
-    vec.push_front(8);
+    vec.push_back(2);
     vec.print();
 
 

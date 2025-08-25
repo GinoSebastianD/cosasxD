@@ -60,7 +60,7 @@ void FL::pop_back() { //eliminar al final
     
 //con puntero doble
     Node** y;
-    for (y = &head; (*y)->next !=0; y = &((*y)->next));
+    for (y = &head; *y!=0 && (*y)->next !=0; y = &((*y)->next));
     delete *y;
     *y = 0;
   //Creando un tmp auxiliar usando un puntero simple

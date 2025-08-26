@@ -20,6 +20,7 @@ public:
 	bool insert(int x);
 	bool delet(int x);
 	bool find(int x , Node**&pos);
+	void buscarelemento(int x);
 	void print();
 
 	~FL();
@@ -37,6 +38,23 @@ bool FL::find(int x, Node**& pos)
 	for (; *pos != 0 && (*pos)->v < x; pos = &((*pos)->next));
 	return *pos && (*pos)->v == x;
 }
+
+void FL::buscarelemento(int x)
+{
+	Node** b = &head;
+	for (; *b != 0; b = &(*b)->next) {
+		if ((*b)->v ==x)
+		{
+			cout << "si esta" << endl;
+			return;
+		}
+	}
+	cout << "no esta" << endl;
+	return;
+
+}
+
+
 
 
 bool FL::insert(int x)
@@ -96,5 +114,8 @@ int main() {
 	fl.insert(4);
 	fl.insert(3);
 	fl.delet(3);
+	fl.buscarelemento(4);
 	fl.print();
 }
+
+

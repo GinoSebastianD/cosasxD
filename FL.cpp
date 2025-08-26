@@ -40,7 +40,13 @@ private:
 
 FL::~FL()
 {
-    delete head;
+    Node* p=head;
+    while(p){
+        p = p ->next;
+        delete head;
+        head=p;
+    }
+
 }
 
 void FL::push_back(int x) { // agregar al final

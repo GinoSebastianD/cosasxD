@@ -64,8 +64,7 @@ bool FL::insert(int x)
 	{
 		return false;
 	}
-	
-
+	//find(pos, x); --> quitando el if anterior logramos q se cree la lista enlazada con repeticiones y ordenado.
 	Node* n = new Node(x);
 	
 	n->next = *pos;

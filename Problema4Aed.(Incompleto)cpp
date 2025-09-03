@@ -1,0 +1,55 @@
+//usar recursividad  y solo verificar arriba abajo , izquierda y derecha
+//doble for para encontrar A automaticamente en td la matriz
+//
+
+#include <iostream>
+using namespace std;
+
+struct Posicion
+{
+	int x;
+	int y;
+};
+
+int main() {
+
+	char caminos[10][10] = {
+	{'A','X',' ',' ',' ',' ',' ',' ',' ','X'},
+	{' ','X',' ',' ',' ',' ','X','X',' ','X'},
+	{' ','X',' ','X','X',' ','X','X','X','X'},
+	{' ','X',' ','X',' ',' ','X',' ',' ',' '},
+	{' ',' ',' ','X',' ',' ',' ',' ','X','X'},
+	{' ','X','X','X','X','X',' ',' ','X',' '},
+	{' ',' ',' ',' ','X',' ',' ',' ',' ',' '},
+	{' ','X','X',' ','X',' ',' ','X','X','X'},
+	{'X','X',' ',' ','X',' ',' ','X',' ',' '},
+	{' ',' ',' ','X','X',' ',' ',' ',' ','B'},
+	};
+
+	char* val = nullptr;
+	Posicion punto;
+	for (char (*p)[10] = caminos; p < caminos + 10; p++)
+	{
+		for (char* q = *p; q < *p + 10; q++)
+		{
+			if (*q == 'A')
+			{
+				punto = *q;
+				break;
+			}
+		}
+	}
+
+
+
+
+	for (char (*p)[10] = caminos; p < caminos + 10; p++)
+	{
+		for (char* q = *p; q < *p + 10; q++)
+		{
+			cout << *q;
+		}
+		cout << endl;
+	}
+
+}

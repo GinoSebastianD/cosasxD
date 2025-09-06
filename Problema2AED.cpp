@@ -56,12 +56,14 @@ int main() {
         contador++;
     }
 
-    thread t1(cuentaporfilas, 0, 10 / 2);
-    thread t2(cuentaporfilas, 10 / 2, 10);
-
+    thread t1(cuentaporfilas, 0, 3);
+    thread t2(cuentaporfilas, 3, 6);
+    thread t3(cuentaporfilas, 6, 8);    
+    thread t4(cuentaporfilas, 8, 10);   
     t1.join();
     t2.join();
-
+    t3.join();
+    t4.join();
     for (int (*p)[10] = arr; p < arr + 10; p++) {
         for (int* q = *p; q < *(p + 1); q++) {
             cout << *q << "  ";

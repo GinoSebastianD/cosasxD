@@ -1,6 +1,3 @@
-//usar recursividad  y solo verificar arriba abajo , izquierda y derecha
-//doble for para encontrar A automaticamente en td la matriz
-//
 #include <iostream>
 using namespace std;
 
@@ -15,19 +12,20 @@ bool encontrar(char matriz[10][10], char* x) {
     char tmp = *x;
     if (*x != 'A')
         *x = '.'; 
-    if (fil > 0 && encontrar(matriz, x - 10)) { //recursividad abajo
+    if (col < 9 && encontrar(matriz, x + 1)) { // derecha
+        return true;
+    }
+    if (fil > 0 && encontrar(matriz, x - 10)) { //abajo
         
         return true;
     }
-    if (fil < 9 && encontrar(matriz, x + 10)) { //recursividad arriba
+    if (fil < 9 && encontrar(matriz, x + 10)) { // arriba
         return true;
     }
-    if (col > 0 && encontrar(matriz, x - 1)) { //recursividad a la izquierda
+    if (col > 0 && encontrar(matriz, x - 1)) { // izquierda
         return true;
     }
-    if (col < 9 && encontrar(matriz, x + 1)) { //recursividad a la derecha
-        return true;
-    }
+   
 
     if (tmp == ' ')
         *x = ' ';
@@ -37,7 +35,7 @@ bool encontrar(char matriz[10][10], char* x) {
 
 int main() {
     char caminos[10][10] = {
-        {' ','X',' ',' ',' ',' ',' ',' ',' ','X'},
+        {'A','X',' ',' ',' ',' ',' ',' ',' ','X'},
         {' ','X',' ',' ',' ',' ','X','X',' ','X'},
         {' ','X',' ','X','X',' ','X','X','X','X'},
         {' ','X',' ','X',' ',' ','X',' ',' ',' '},
@@ -46,7 +44,7 @@ int main() {
         {' ',' ',' ',' ','X',' ',' ',' ',' ',' '},
         {' ','X','X',' ','X',' ',' ','X','X','X'},
         {'X','X',' ',' ','X',' ',' ','X',' ',' '},
-        {'A',' ',' ','X','X',' ',' ',' ',' ','B'},
+        {' ',' ',' ','X','X',' ',' ',' ',' ','B'},
     };
 
     char* x = nullptr;
@@ -73,4 +71,3 @@ int main() {
         cout << endl;
     }
 }
-

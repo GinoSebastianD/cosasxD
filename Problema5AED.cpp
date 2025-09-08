@@ -1,6 +1,6 @@
 // si head pasa a tail esta vacio
 // si head y tail apuntan al mismo lugar , queda un elemento
-//
+//Caso : cuando la cola la llenamos , la vaciamos y luego hacemos POP , el head debe volver
 #include "iostream"
 using namespace std;
 
@@ -28,9 +28,19 @@ private:
 
 bool Cola::pop(int & x)
 {
-	x = *head;
-	head++;
-	return true;
+	if (head >  arr+9 )
+	{
+		head = arr;
+		x = *head;
+		head++;
+		return true;
+	}
+	else
+	{
+		x = *head;
+		head++;
+		return true;
+	}
 }
 
 void Cola::push(int x)
@@ -60,12 +70,33 @@ void Cola::push(int x)
 
 void Cola::print()
 {
+	if (head == tail)
+	{
+		cout<<"Vacia";
+		return;
+	}
 	int* p = head;
-	while (p < arr +10)
+	while (p < arr + 10)
+	{
+		if (head>tail)
+		{
+			cout << *p << " ";
+			p++;
+		}
+		else {
+			p++;
+		}
+	}
+
+
+	p = arr;
+	while (p<tail)
 	{
 		cout << *p << " ";
 		p++;
 	}
+	
+	
 }
 
 
@@ -82,19 +113,9 @@ Cola::~Cola()
 int main() {
 	Cola col;
 	col.push(1);
-	col.push(2);
-	col.push(3);
-	col.push(4);
-	col.push(5);
-	col.push(6);
-	col.push(7);
-	col.push(8);
-	col.push(9);
-	col.push(10);
-	int eliminado;
-	col.pop(eliminado);
-	col.push(11);
-	cout << eliminado << endl;
+	int val;
+	col.pop(val);
+	cout << val << endl;
 
 	col.print();
 }

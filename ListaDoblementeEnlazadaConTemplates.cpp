@@ -64,15 +64,24 @@ void LD<T>::insert(T x)
 	Node<T>* ant = new Node<T>(x);
 	if (x < pos->v)
 	{
-		head = ant;
-		ant->next = pos;
-		pos->prev = ant;
-		return;
+		if (head->v > x)
+		{
+			head = ant;
+			ant->next = pos;
+			pos->prev = ant;
+			return;
+		}
+		else
+		{
+			pos->prev->next = ant;
+			ant->prev = pos->prev;
+			ant->next = pos;
+			pos->prev = ant;
+			return;
+		}
+		
 	}
-	if (pos->next!=nullptr)
-	{
 
-	}
 
 
 	pos->next = ant;
@@ -109,7 +118,13 @@ int main() {
 	ld.insert(4);
 	ld.insert(3);
 	ld.insert(2);
+	ld.insert(6);
 	ld.insert(5);
+	ld.insert(9);
+	ld.insert(8);
+	ld.insert(20);
+
+
 	ld.print();
 
 }

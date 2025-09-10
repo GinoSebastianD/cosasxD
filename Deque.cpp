@@ -24,23 +24,26 @@ void Deque::push_front(int x)
 {
 	if (ini_array == nullptr)
 	{
+	
 		*ini = new int[5];
 		ini_array = *ini+2;
 		fin_array = ini_array;
-		fin_array++;
-	}
-	if (ini_array == *ini)
-	{
 		*ini_array = x;
+
+	}
+	else if (ini_array == *ini)
+	{
 		ini--;
 		*ini = new int[5];
 		ini_array = *ini+(tam-1);
+		*ini_array = x;
+
 		
 	}
 	else
 	{
-		*ini_array = x;
 		ini_array--;
+		*ini_array = x;
 	}
 
 }
@@ -49,33 +52,36 @@ void Deque::push_back(int x)
 {
 	if (fin_array == nullptr && fin == ini)
 	{
-		*fin = new int[5];
-		fin_array = *fin + 2;
-		ini_array = fin_array;
-		ini_array--;
+		*ini = new int[5];
+		ini_array = *fin + 2;
+		fin_array = ini_array;
+		*ini_array = x;
 	}
 	if (fin_array == *fin+(tam-1))
 	{
-		*fin_array = x;
 		fin++;
 		*fin = new int[5];
 		fin_array = *fin;
+		*fin_array = x;
+
 		
 	}
 	else
 	{
-		*fin_array = x;
 		fin_array++;
+		*fin_array = x;
 	}
 }
 
 int Deque::pop_front() {
+	
 	int eliminado = 0;
 	if (ini_array == nullptr && fin_array == nullptr)
 	{
+		cout << endl;
 		return -1;
 	}
-	if (ini_array == fin_array)
+	else if  (ini_array == fin_array)
 	{
 		eliminado = *ini_array;
 		ini_array = nullptr;
@@ -83,19 +89,18 @@ int Deque::pop_front() {
 		delete[] * ini;
 		
 	}
-	if (*ini+(tam-1) == ini_array)
+	else if (*ini+(tam-1) == ini_array)
 	{
 		eliminado = *ini_array;
 		delete [] *  ini;
 		ini++;
-		ini_array = *ini;
-			
+		ini_array = *ini;	
 	}
 	else
 	{
-		ini_array++;
-		eliminado = *ini_array;
-
+			eliminado = *ini_array;
+			ini_array++;
+		
 	}
 	return eliminado;
 }
@@ -105,28 +110,31 @@ int Deque::pop_back() {
 
 	if (ini_array == nullptr && fin_array == nullptr)
 	{
+		cout << endl;
 		return -1;
 	}
-	if (ini_array == fin_array)
+	else if (ini_array == fin_array)
 	{
 		eliminado = *fin_array;
 		ini_array = nullptr;
 		fin_array = nullptr;
-		delete[] * fin;
-		cout << "fin del array";
+		delete[] * ini;
 	}
-	if (*fin == fin_array)
+	else if (*fin == fin_array)
 	{
 		eliminado = *fin_array;
 		delete[] * fin;
-		fin++;
-		fin_array = *fin;
+		fin--;
+		fin_array = *fin+4;
 
 	}
+
+	
 	else
 	{
-		fin_array--;
 		eliminado = *fin_array;
+		fin_array--;
+
 
 	}
 	return eliminado;

@@ -98,7 +98,7 @@ int Deque::pop_front() {
 	}
 	else
 	{
-		eliminado = *ini_array;
+			eliminado = *ini_array;
 			ini_array++;
 		
 	}
@@ -125,14 +125,13 @@ int Deque::pop_back() {
 		eliminado = *fin_array;
 		delete[] * fin;
 		fin--;
-		fin_array = *fin+5;
+		fin_array = *fin+4;
 
 	}
 
 	
 	else
 	{
-
 		eliminado = *fin_array;
 		fin_array--;
 
@@ -143,7 +142,30 @@ int Deque::pop_back() {
 
 void Deque::print()
 {
-	
+	if (ini_array == nullptr && fin_array == nullptr)
+	{
+		cout << "vacio" << endl;
+		return;
+	}
+	int** temp_ini = ini;
+	int* temp_ini_array = ini_array;
+	while (temp_ini <= fin)
+	{
+		cout << "[";
+		while (temp_ini_array <= *temp_ini +(tam-1))
+		{
+			cout << *temp_ini_array << " ";
+			if (temp_ini_array == fin_array)
+			{
+				break;
+			}
+			temp_ini_array++;
+		}
+		cout << "]";
+		temp_ini++;
+		temp_ini_array = *temp_ini;
+		cout << endl;
+	}
 }
 
 
@@ -156,14 +178,8 @@ int main() {
 	dq.push_front(9);
 	dq.push_front(10);
 	dq.push_front(11);
-	cout << dq.pop_front()<< " ";
-	cout << dq.pop_front()<< " ";
-	cout << dq.pop_front()<< " ";
-	cout << dq.pop_front()<< " ";
-	cout << dq.pop_back() << " ";
-	cout << dq.pop_back() << " ";
-	cout << dq.pop_back() << " ";
-	cout << dq.pop_back() << " ";
+
+	dq.print();
 
 
 }

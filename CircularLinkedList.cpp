@@ -1,3 +1,4 @@
+//falta usar functores y meterle templates
 #include <iostream>
 using namespace std;
 class node

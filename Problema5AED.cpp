@@ -4,53 +4,70 @@
 #include "iostream"
 using namespace std;
 
+template<class T>
 class Cola
 {
 public:
 	Cola() {
 		head = nullptr;
 		tail = nullptr;
+		elem = 0;
 	}
 
-	bool pop(int & x);
-	void push(int x);
+	bool pop(T& x);
+	void push(T x);
 	void print();
 
-	~Cola();
 
 private:
-	int* head;
-	int* tail;
-	int arr[10];
+	T* head;
+	T* tail;
+	T arr[10];
+	T elem;
 };
 
 
-
-bool Cola::pop(int & x)
+template<class T>
+bool Cola<T>::pop(T& x)
 {
-	if (head >  arr+9 )
+	if (elem == 0)
+	{
+		return false;
+	}
+	if (head == nullptr) {
+		return false;
+	}
+	if (head > arr + 9)
 	{
 		head = arr;
 		x = *head;
 		head++;
+		elem--;
 		return true;
 	}
 	else
 	{
 		x = *head;
 		head++;
+		elem--;
 		return true;
 	}
 }
-
-void Cola::push(int x)
+template<class T>
+void Cola<T>::push(T x)
 {
+	if (elem == 10)
+	{
+		cout << "se lleno"<< endl;
+		return;
+	}
 	if (head == nullptr)
 	{
 		tail = arr;
 		head = arr;
 		*head = x;
 		tail++;
+		elem++;
 		return;
 	}
 	if (tail > arr + 9 && head != arr)
@@ -58,64 +75,78 @@ void Cola::push(int x)
 		tail = arr;
 		*tail = x;
 		tail++;
+		elem++;
 		return;
 	}
 	else
 	{
 		*tail = x;
 		tail++;
+		elem++;
 	}
-	
-}
 
-void Cola::print()
-{
-	if (head == tail)
-	{
-		cout<<"Vacia";
+}
+template<class T>
+void Cola<T>::print() {
+	if (elem == 0) {
+		cout << "ta vacia" << endl;
 		return;
 	}
-	int* p = head;
-	while (p < arr + 10)
-	{
-		if (head>tail)
-		{
-			cout << *p << " ";
-			p++;
-		}
-		else {
-			p++;
-		}
-	}
-
-
-	p = arr;
-	while (p<tail)
-	{
+	T* p = head;
+	int count = 0;
+	while (count < elem) {
 		cout << *p << " ";
 		p++;
+		if (p > arr + 9) {
+			p = arr;
+		}
+		count++;
 	}
-	
-	
+	cout << endl;
 }
-
-
-
-Cola::~Cola()
-{
-
-
-}
-
-
-
-
 int main() {
-	Cola col;
-	col.push(1);
+	Cola<int> col;
+	for (int i = 0; i < 10; i++) {
+		col.push(i); 
+	}
 	int val;
-	col.pop(val);
-	cout << val << endl;
+	for (int i = 0; i < 5; i++) {
+		col.pop(val);
+	}
+	col.push(11);
 
+
+
+	//for (int i = 0; i < 10; i++) {
+	//	col.push(i); // Llena la cola
+	//}
+	//int val;
+	//for (int i = 0; i < 10; i++) {
+	//	col.pop(val); // Vacía la cola
+	//}
+	//col.pop(val);
+	
+	//for (int i = 0; i < 10; i++)
+	//{
+	//	col.push(i);
+	//}
+	//for (int i = 0; i < 5; i++)
+	//{
+	//	col.pop(i);
+	//}
+	//for (int i = 0; i < 5; i++)
+	//{
+	//	col.push(i);
+	//}
+
+
+	//for (int i = 0; i < 10; i++)
+	//{
+	//	col.push(i);
+	//}
+	//int val;
+	//col.pop(val);
+	//cout << val << endl;
+	//col.push(15);
 	col.print();
 }

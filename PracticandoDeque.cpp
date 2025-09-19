@@ -8,8 +8,8 @@ public:
 	Deque(int siz_map, int siz_vec);
 	void push_back(int x);
 	void push_front(int x);
-	void pop_back();
-	void pop_front();
+	int pop_back();
+	int pop_front();
 	int& operator [] (int x);
 	void print(Deque *p);
 	~Deque();
@@ -103,10 +103,35 @@ void Deque::push_front(int x)
 		nelem++;
 	}
 }
-void Deque::pop_back()
+int Deque::pop_back()
 {
+	int elemento = 0;
+
+	if (ini_array == fin_array)
+	{
+		elemento = *fin_array;
+		fin_array = nullptr;
+		ini_array = nullptr;
+		delete* fin;
+		nelem--;
+	}
+	else if (fin_array == *fin)
+	{
+		elemento = *fin_array;
+		delete *fin;
+		fin--;
+		fin_array = *fin + size_vec-1;
+		nelem--;
+	}
+	else
+	{
+		elemento = *fin_array;
+		fin_array--;
+		nelem--;
+	}
+	
 }
-void Deque::pop_front()
+int Deque::pop_front()
 {
 }
 int& Deque::operator[](int x)
@@ -123,6 +148,9 @@ void print(Deque* p)
 }
 Deque::~Deque()
 {
+
+
+
 }
 
 int main() {

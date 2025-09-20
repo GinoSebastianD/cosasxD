@@ -17,6 +17,8 @@ public:
 	bool pop(T& x);
 	void push(T x);
 	void print();
+	int front();
+	int back();
 
 
 private:
@@ -58,7 +60,7 @@ void Cola<T>::push(T x)
 {
 	if (elem == 10)
 	{
-		cout << "se lleno"<< endl;
+		cout << "se lleno" << endl;
 		return;
 	}
 	if (head == nullptr)
@@ -104,49 +106,47 @@ void Cola<T>::print() {
 	}
 	cout << endl;
 }
+template<class T>
+int Cola<T>::front() // acceder al primer elemento
+{
+	if (elem == 0)
+	{
+		cout << "ta vacia";
+		return -1;
+	}
+	cout << *head <<endl;
+	return *head;
+}
+template<class T>
+int Cola<T>::back() //acceder al último elemento
+{
+	if (elem == 0)
+	{
+		cout << "ta vacia";
+		return -1;
+	}
+	cout << *tail << endl;
+	return *tail;
+
+}
 int main() {
 	Cola<int> col;
-	for (int i = 0; i < 10; i++) {
-		col.push(i); 
+	for (int i = 5; i < 10; i++) {
+		col.push(i);
 	}
+	col.print();
+
+	cout << endl;
+	col.front();
+	cout << endl;
 	int val;
 	for (int i = 0; i < 5; i++) {
 		col.pop(val);
+
+		cout << val << " ";
 	}
-	col.push(11);
+	cout << endl;
+	col.front();
 
 
-
-	//for (int i = 0; i < 10; i++) {
-	//	col.push(i); // Llena la cola
-	//}
-	//int val;
-	//for (int i = 0; i < 10; i++) {
-	//	col.pop(val); // Vacía la cola
-	//}
-	//col.pop(val);
-	
-	//for (int i = 0; i < 10; i++)
-	//{
-	//	col.push(i);
-	//}
-	//for (int i = 0; i < 5; i++)
-	//{
-	//	col.pop(i);
-	//}
-	//for (int i = 0; i < 5; i++)
-	//{
-	//	col.push(i);
-	//}
-
-
-	//for (int i = 0; i < 10; i++)
-	//{
-	//	col.push(i);
-	//}
-	//int val;
-	//col.pop(val);
-	//cout << val << endl;
-	//col.push(15);
-	col.print();
 }

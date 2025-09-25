@@ -44,11 +44,11 @@ bool ArbolBinario::find(int x, Node**& pos)
 	{
 		if ((*pos)->x < x)
 		{
-			pos = &(*pos)->izq;
+			pos = &(*pos)->der;
 		}
 		else
 		{
-			pos = &(*pos)->der;
+			pos = &(*pos)->izq;
 		}
 	}
 	return *pos != nullptr;

@@ -47,6 +47,23 @@ public:
 
 
     void sort() {
+        Node<T>* tmp = head;
+        Node<T>* dem = new Node<T>(-1);
+        while (tmp)
+        {
+            Node<T>* prev = dem;
+            Node<T>* sig = tmp->next;
+            while (prev->next != nullptr && prev->next->val < tmp->val)
+            {
+                prev = prev->next;
+            }
+            tmp->next = prev->next;
+            prev->next = tmp;
+            tmp = sig;
+
+
+        }
+        head = dem->next;
         
 
 

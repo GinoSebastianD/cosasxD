@@ -11,7 +11,7 @@ public:
 	Cola() {
 		head = nullptr;
 		tail = nullptr;
-
+		elem = 0;
 	}
 
 	bool pop(T& x);
@@ -38,6 +38,7 @@ bool Cola<T>::pop(T& x)
 		cout << "ta vacio";
 		return false;
 	}
+	
 	if (head == nullptr) {
 		return false;
 	}
@@ -68,7 +69,7 @@ bool Cola<T>::push(T x)
 	}
 	if (head == nullptr)
 	{
-		tail = arr ;
+		tail = arr;
 		head = arr;
 		tail++;
 		*head = x;
@@ -83,8 +84,8 @@ bool Cola<T>::push(T x)
 		elem++;
 		return true;
 	}
-	
-	
+
+
 	else
 	{
 		*tail = x;
@@ -102,11 +103,11 @@ bool Cola<T>::lleno()
 	{
 		return true;
 	}
-	if ( head != nullptr && head != arr && tail == head)
+	if (head != nullptr && head != arr && tail == head)
 	{
 		return true;
 	}
-	
+
 	return false;
 }
 template<class T>
@@ -116,11 +117,12 @@ bool Cola<T>::vacio()
 	{
 		return true;
 	}
-	if (head != nullptr && head == tail)
+	if (head == tail)
 	{
+		head = nullptr;
+		tail = nullptr;
 		return true;
 	}
-	
 	return false;
 }
 template<class T>
@@ -144,22 +146,23 @@ void Cola<T>::print() {
 int main() {
 	Cola<int> col;
 	for (int i = 0; i < 10; i++) {
-		col.push(i); 
+		col.push(i);
 	}
 	col.print();
 	int val;
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 9; i++) {
 		col.pop(val); // Vacía la cola
 	}
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 1; i++) {
 		col.push(i);
 	}
-	for (int i = 0; i < 10; i++) {
-		col.pop(val); // Vacía la cola
-	}
+	int x;
+	col.pop(x);
+	col.pop(x);
+	col.print();
 
 
-	
+
 
 
 
@@ -171,7 +174,7 @@ int main() {
 	//	col.pop(val); // Vacía la cola
 	//}
 	//col.pop(val);
-	
+
 	//for (int i = 0; i < 10; i++)
 	//{
 	//	col.push(i);

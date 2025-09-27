@@ -11,7 +11,6 @@ public:
 	Cola() {
 		head = nullptr;
 		tail = nullptr;
-		elem = 0;
 	}
 
 	bool pop(T& x);
@@ -26,7 +25,6 @@ private:
 	T* head;
 	T* tail;
 	T arr[10];
-	T elem;
 };
 
 
@@ -38,26 +36,26 @@ bool Cola<T>::pop(T& x)
 		cout << "ta vacio";
 		return false;
 	}
-	
-	if (head == nullptr) {
+
+	else if (!head) {
 		return false;
 	}
-	if (head > arr + 9)
+	else if (head + 1 == arr + 10)
 	{
-		head = arr;
+
 		x = *head;
-		head++;
-		elem--;
+		head = arr;
 		return true;
 	}
 	else
 	{
 		x = *head;
 		head++;
-		elem--;
 		return true;
 	}
+	
 }
+
 template<class T>
 bool Cola<T>::push(T x)
 {
@@ -67,32 +65,23 @@ bool Cola<T>::push(T x)
 		cout << "se lleno" << endl;
 		return false;
 	}
-	if (head == nullptr)
+	else if (!head)
 	{
-		tail = arr;
-		head = arr;
-		tail++;
-		*head = x;
-		elem++;
-		return true;
+		tail = head = arr;
 	}
-	if (tail > arr + 9 && head != arr)
+	else if (tail == arr + 9 && head != arr)
 	{
+
 		tail = arr;
-		*tail = x;
-		tail++;
-		elem++;
-		return true;
+
 	}
-
-
 	else
 	{
-		*tail = x;
+		
 		tail++;
-		elem++;
-		return true;
 	}
+	*tail = x;
+	return true;
 
 }
 
@@ -103,10 +92,14 @@ bool Cola<T>::lleno()
 	{
 		return true;
 	}
-	if (head != nullptr && head != arr && tail == head)
+	if (tail+1 == head)
 	{
 		return true;
 	}
+	//if (head != nullptr && head != arr && tail == head)
+	//{
+	//	return true;
+	//}
 
 	return false;
 }
@@ -117,11 +110,9 @@ bool Cola<T>::vacio()
 	{
 		return true;
 	}
-	if (head == tail)
-	{
+	if (head == tail) {
 		head = nullptr;
 		tail = nullptr;
-		return true;
 	}
 	return false;
 }
@@ -131,15 +122,17 @@ void Cola<T>::print() {
 		cout << "ta vacia" << endl;
 		return;
 	}
+
 	T* p = head;
-	int count = 0;
-	while (count < elem) {
-		cout << *p << " ";
+	cout << *p << " "; // Imprimir el primer elemento
+
+	// Imprimir los elementos restantes hasta llegar a tail
+	while (p != tail) {
 		p++;
 		if (p > arr + 9) {
 			p = arr;
 		}
-		count++;
+		cout << *p << " ";
 	}
 	cout << endl;
 }
@@ -149,16 +142,20 @@ int main() {
 		col.push(i);
 	}
 	col.print();
+	cout << endl;
 	int val;
-	for (int i = 0; i < 9; i++) {
+	for (int i = 0; i < 5; i++) {
 		col.pop(val); // Vacía la cola
 	}
-	for (int i = 0; i < 1; i++) {
+	col.print();
+	for (int i = 0; i < 5; i++) {
 		col.push(i);
 	}
+	col.print();
 	int x;
-	col.pop(x);
-	col.pop(x);
+	for (int i = 0; i < 10; i++) {
+		col.pop(x); // Vacía la cola
+	}
 	col.print();
 
 
@@ -193,8 +190,8 @@ int main() {
 	//{
 	//	col.push(i);
 	//}
-	//int val;
-	//col.pop(val);
-	//cout << val << endl;
+	//int x = 0;
+	//col.pop(x);
+	//cout << x << endl;
 	//col.push(15);
 }

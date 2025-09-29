@@ -32,7 +32,7 @@ public:
     void pop_back();
     void pop_front();
 
-    void merge(Node*& A, Node*& B);
+    void merge(Node* A, Node* B);
     void print();
     ~FL(); //destructor
 
@@ -88,44 +88,83 @@ void FL::pop_front() { //eliminar al inicio
     delete tmp;
 }
 
-void FL::merge(Node*& A, Node*& B)
+
+
+void FL::merge(Node* A, Node* B)
 {
 
-    Node* tmpA = A;
-    Node* tmpB = B;
+
     Node* prev = nullptr;
     Node** pos = &prev;
 
-    while (tmpA && tmpB)
+    while (A && B)
     {
-        if (tmpA->v<tmpB->v)
+        if (A->v < B->v)
         {
-            *pos = tmpA;
-            tmpA = tmpA->next;
+            *pos = A;
+            A = A->next;
         }
         else
         {
-            *pos = tmpB;
-            tmpB = tmpB->next;
+            *pos = B;
+            B = B->next;
         }
         pos = &(*pos)->next;
 
     }
-    if (!tmpA)
+    if (!A)
     {
-        *pos = tmpB;
+        *pos = B;
     }
-    if (!tmpB)
+    if (!B)
     {
-        *pos = tmpA;
+        *pos = A;
     }
-    tmpA = A; // para el destructor
-    head = tmpA;
-    A = nullptr;
+    
+    A = prev; // A apunta a la cabeza de la lista
     B = nullptr; // B null
-
+    head = A; // para llamar a mi print
 
 }
+//
+//void FL::merge(Node*& A, Node*& B)
+//{
+//
+//    Node* tmpA = A;
+//    Node* tmpB = B;
+//    Node* prev = nullptr;
+//    Node** pos = &prev;
+//
+//    while (tmpA && tmpB)
+//    {
+//        if (tmpA->v<tmpB->v)
+//        {
+//            *pos = tmpA;
+//            tmpA = tmpA->next;
+//        }
+//        else
+//        {
+//            *pos = tmpB;
+//            tmpB = tmpB->next;
+//        }
+//        pos = &(*pos)->next;
+//
+//    }
+//    if (!tmpA)
+//    {
+//        *pos = tmpB;
+//    }
+//    if (!tmpB)
+//    {
+//        *pos = tmpA;
+//    }
+//    tmpA = A; // para el destructor
+//    head = tmpA;
+//    A = nullptr;
+//    B = nullptr; // B null
+//
+//
+//}
 
 
 
@@ -141,7 +180,6 @@ void FL::print()
 }
 int main() {
     FL fl;
-    fl.push_front(9);
     fl.push_front(7);
     fl.push_front(5);
     fl.push_front(3);
@@ -162,5 +200,8 @@ int main() {
     FL fl3;
     fl3.merge(fl.head, fl2.head);
     fl3.print();
+
+    fl.head = NULL;
+    fl2.head = NULL;
     return 0;
 }

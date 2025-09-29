@@ -32,8 +32,7 @@ public:
     void pop_back();
     void pop_front();
 
-    void merge(Node* A, Node* B);
-
+    void merge(Node*& A, Node*& B);
     void print();
     ~FL(); //destructor
 
@@ -45,11 +44,11 @@ FL::~FL()
 {
     Node* p = head;
     while (p) {
+        Node* tmp = p;
         p = p->next;
-        delete head;
-        head = p;
+        delete tmp;
     }
-
+    head = nullptr;
 }
 
 void FL::push_back(int x) { // agregar al final
@@ -89,21 +88,45 @@ void FL::pop_front() { //eliminar al inicio
     delete tmp;
 }
 
-void FL::merge(Node* A, Node* B)
+void FL::merge(Node*& A, Node*& B)
 {
+
     Node* tmpA = A;
     Node* tmpB = B;
-    while (tmpA)
+    Node* prev = nullptr;
+    Node** pos = &prev;
+
+    while (tmpA && tmpB)
     {
         if (tmpA->v<tmpB->v)
         {
-            x
+            *pos = tmpA;
+            tmpA = tmpA->next;
         }
+        else
+        {
+            *pos = tmpB;
+            tmpB = tmpB->next;
+        }
+        pos = &(*pos)->next;
 
     }
+    if (!tmpA)
+    {
+        *pos = tmpB;
+    }
+    if (!tmpB)
+    {
+        *pos = tmpA;
+    }
+    tmpA = A; // para el destructor
+    head = tmpA;
+    A = nullptr;
+    B = nullptr; // B null
 
 
 }
+
 
 
 void FL::print()
@@ -134,8 +157,10 @@ int main() {
     fl2.push_front(4);
     fl2.push_front(2);
     fl2.print();
-  /*  FL fl3;
-    fl3.merge(fl.head, fl2.head);*/
-    
+
+    cout << endl;
+    FL fl3;
+    fl3.merge(fl.head, fl2.head);
+    fl3.print();
     return 0;
 }

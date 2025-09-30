@@ -92,8 +92,6 @@ void FL::pop_front() { //eliminar al inicio
 
 void FL::merge(Node* A, Node* B)
 {
-
-
     Node* prev = nullptr;
     Node** pos = &prev;
 
@@ -126,50 +124,13 @@ void FL::merge(Node* A, Node* B)
     head = A; // para llamar a mi print
 
 }
-//
-//void FL::merge(Node*& A, Node*& B)
-//{
-//
-//    Node* tmpA = A;
-//    Node* tmpB = B;
-//    Node* prev = nullptr;
-//    Node** pos = &prev;
-//
-//    while (tmpA && tmpB)
-//    {
-//        if (tmpA->v<tmpB->v)
-//        {
-//            *pos = tmpA;
-//            tmpA = tmpA->next;
-//        }
-//        else
-//        {
-//            *pos = tmpB;
-//            tmpB = tmpB->next;
-//        }
-//        pos = &(*pos)->next;
-//
-//    }
-//    if (!tmpA)
-//    {
-//        *pos = tmpB;
-//    }
-//    if (!tmpB)
-//    {
-//        *pos = tmpA;
-//    }
-//    tmpA = A; // para el destructor
-//    head = tmpA;
-//    A = nullptr;
-//    B = nullptr; // B null
-//
-//
-//}
+
 
 
 
 void FL::print()
 {
+
     for (Node* i = head; i; i = i->next)
     {
         cout << i->v << "->";
@@ -197,11 +158,16 @@ int main() {
     fl2.print();
 
     cout << endl;
-    FL fl3;
-    fl3.merge(fl.head, fl2.head);
-    fl3.print();
 
-    fl.head = NULL;
+    
+    fl.merge(fl.head, fl2.head);
+    fl.print();
+    cout << endl;
+
     fl2.head = NULL;
+    fl2.print();
+
+   /* fl2.print();*/
+
     return 0;
 }

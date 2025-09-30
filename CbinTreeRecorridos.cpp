@@ -23,7 +23,11 @@ public:
 	bool insert(int x);
 	bool del(int x);
 	void in_orden(Node* r);
+	void reverse(Node* r);
 	void post_orden(Node* r);
+	void pre_orden(Node* r);
+
+
 	~RecorridoArbol();
 
 private:
@@ -80,34 +84,65 @@ void RecorridoArbol::in_orden(Node* r)
 	in_orden(r->der);
 }
 
+void RecorridoArbol::reverse(Node* r)
+{
+	if (!r)
+	{
+		return;
+	}
+	reverse(r->der);
+	cout << r->v << " ";
+	reverse(r->izq);
+}
+
 void RecorridoArbol::post_orden(Node* r)
 {
 	if (!r)
 	{
 		return;
 	}
-	in_orden(r->der);
-	in_orden(r->izq);
+	post_orden(r->izq);
+	post_orden(r->der);
 	cout << r->v << " ";
+}
+
+void RecorridoArbol::pre_orden(Node* r)
+{
+	if (!r)
+	{
+		return;
+	}
+	cout << r->v << " ";
+	pre_orden(r->izq);
+	pre_orden(r->der);
+	
 }
 
 RecorridoArbol::~RecorridoArbol()
 {
+	delete root;
 }
 
 int main() {
 	RecorridoArbol arb;
-	arb.insert(8);
-	arb.insert(5);
-	arb.insert(6);
+	
+	arb.insert(15);
+	arb.insert(25);
+	arb.insert(12);
 	arb.insert(7);
-	arb.insert(9);
-	arb.insert(10);
-	arb.insert(11);
-	arb.insert(4);
-	arb.insert(3);
+	arb.insert(13);
+	arb.insert(18);
+	arb.insert(30);
 
+
+
+	arb.post_orden(arb.root);
+	cout << endl;
 	arb.in_orden(arb.root);
+	cout << endl;
+	arb.reverse(arb.root);
+	cout << endl;
+	arb.pre_orden(arb.root);
 
 	return 0;
 }

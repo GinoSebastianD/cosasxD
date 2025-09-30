@@ -26,6 +26,7 @@ public:
 	void reverse(Node* r);
 	void post_orden(Node* r);
 	void pre_orden(Node* r);
+	void liberar_memoria(Node* r);
 
 
 	~RecorridoArbol();
@@ -117,10 +118,19 @@ void RecorridoArbol::pre_orden(Node* r)
 	pre_orden(r->der);
 	
 }
-
+void RecorridoArbol::liberar_memoria(Node* r)
+{
+	if (!r)
+	{
+		return;
+	}
+	liberar_memoria(r->izq);
+	liberar_memoria(r->der);
+	delete r;
+}
 RecorridoArbol::~RecorridoArbol()
 {
-	delete root;
+	liberar_memoria(root);
 }
 
 int main() {

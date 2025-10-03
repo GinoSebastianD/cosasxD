@@ -32,7 +32,7 @@ public:
     void pop_back();
     void pop_front();
 
-    void merge(Node* A, Node* B);
+    void merge(Node*& A, Node*& B);
     void print();
     ~FL(); //destructor
 
@@ -90,7 +90,7 @@ void FL::pop_front() { //eliminar al inicio
 
 
 
-void FL::merge(Node* A, Node* B)
+void FL::merge(Node*& A, Node*& B)
 {
     Node* prev = nullptr;
     Node** pos = &prev;
@@ -121,7 +121,6 @@ void FL::merge(Node* A, Node* B)
     
     A = prev; // A apunta a la cabeza de la lista
     B = nullptr; // B null
-    head = A; // para llamar a mi print
 
 }
 
@@ -164,9 +163,7 @@ int main() {
     fl.print();
     cout << endl;
 
-    fl2.head = NULL;
     fl2.print();
-
    /* fl2.print();*/
 
     return 0;

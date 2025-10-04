@@ -59,7 +59,25 @@ public:
 
     void del(int value)
     {
-        
+        node* act = head;
+        while (act->next != head && act->next->data != value)
+        {
+            act = act->next;
+        }
+        if (head->next == head)
+        {
+            head = nullptr;
+            delete act;
+        }
+        else
+        {
+            node* tmp = act->next;
+            act->next = tmp->next;
+            if (head->data == value) {
+                head = tmp->next;
+            }
+            delete tmp;
+    }
 
     }
 

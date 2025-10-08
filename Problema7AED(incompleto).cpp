@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib> 
 using namespace std;
 
 
@@ -13,11 +14,6 @@ struct Node
         x = v;
     }
 };
-
-
-#include <iostream>
-using namespace std;
-
 template<class T, int N> 
 class Cola {
 public:
@@ -35,15 +31,20 @@ public:
     bool lleno() ;
     bool vacio() ;
     void print() ;
-    Node* arbol(T*& ini, T* fin);
-
-private:
+    Node* arbol(T*& ini, T*& fin);
+    void inorden(Node* n);
 
 };
 
 template<class T, int N>
 bool Cola<T, N>::vacio()  {
-    return head == nullptr;
+ 
+    if (head == tail && head!= nullptr &&tail != nullptr)
+    {
+        return true;
+    }
+    return (head == nullptr && tail == nullptr);
+
 }
 
 template<class T, int N>
@@ -81,12 +82,14 @@ bool Cola<T, N>::pop(T& x) {
         cout << "ta vacio" << endl;
         return false;
     }
+    x = *head;  
 
-    x = *head;
-
-    if (head == tail) { 
-        head = tail = nullptr;
+    if (head == tail) {
+        head = nullptr;
+        tail = nullptr;
     }
+
+  
     else if (head == arr + (N - 1)) {
         head = arr;
     }
@@ -107,7 +110,7 @@ void Cola<T, N>::print() {
     T* p = head;
     cout << "Cola: ";
     while (true) {
-        cout << p->x << " ";  // imprimimos el valor del nodo
+        cout << (*p)->x << " ";
         if (p == tail) break;
         if (p == arr + (N - 1))
             p = arr;
@@ -118,25 +121,52 @@ void Cola<T, N>::print() {
 }
 
 
-template<class T, int N>
-Node* Cola<T, N>::arbol(T*& ini, T* fin)
-{
-    
-    for (int i = 0; i < 16; i++)
-    {
-        ini = push(Node(rand() % 10));
-    }
 
-    
-    Node* pa = new Node(5);
-    
-    return ini;
+template<class T, int N>
+Node* Cola<T, N>::arbol(T*& ini, T*& fin)  
+{  
+    srand(time(NULL)); 
+    Node* raiz = nullptr;
+    for (int i = 0; i < N; i++) {
+        Node* nuevo = new Node(rand() % 10);
+        this->push(nuevo);
+    }
+    while (!this->vacio())
+    {
+        Node* i, * d;
+        this->pop(i);
+        this->pop(d);
+
+        Node* padre = new Node(i->x + d->x);
+        padre->izq = i;
+        padre->der = d;
+
+        this->push(padre);
+        raiz = padre;
+      
+    }
+    return raiz;    
+}
+
+template<class T, int N>
+void Cola<T, N>::inorden(Node* n)
+{
+    if (!n)
+    {
+        return;
+    }
+    inorden(n->izq);
+    cout << n->x << " ";
+    inorden(n->der);
 }
 
 
 
 int main() {
-    Cola<Node, 16> ar;
-    ar.arbol(ar.head,ar.tail);
-    ar.print();
+
+    
+    Cola<Node*, 4> c;
+   
+    c.inorden(c.arbol(c.head, c.tail));
+
 }

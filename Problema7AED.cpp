@@ -39,10 +39,7 @@ public:
 template<class T, int N>
 bool Cola<T, N>::vacio()  {
  
-    if (head == tail && head!= nullptr &&tail != nullptr)
-    {
-        return true;
-    }
+  
     return (head == nullptr && tail == nullptr);
 
 }
@@ -141,8 +138,13 @@ Node* Cola<T, N>::arbol(T*& ini, T*& fin)
         padre->izq = i;
         padre->der = d;
 
-        this->push(padre);
+        if (head != nullptr)
+        {
+            this->push(padre);
+
+        }
         raiz = padre;
+      
       
     }
     return raiz;    

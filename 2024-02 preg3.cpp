@@ -72,13 +72,6 @@ void CBinTree::Print()
 void CBinTree::kneighbors(int x, int k)
 {
     cout << "\n(" << x << "," << k << ") => ";
-
-    CBinNode** pos;
-    if (!Find(x, pos)) {
-        cout << "no esta en el arbol\n";
-        return;
-    }
-
     queue<pair<CBinNode*, int>> col;
     vector<pair<CBinNode*, int>> res;  
 

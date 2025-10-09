@@ -18,6 +18,7 @@ public:
     int* ini_vec;
     int* fin_vec;
     int size;
+    int num_vec;
 };
 
 XVector::XVector(int sm, int sv)
@@ -30,6 +31,7 @@ XVector::XVector(int sm, int sv)
     ini_vec = nullptr;
     fin_vec = nullptr;
     size = 0;
+    num_vec = 0;
 }
 
 XVector::~XVector()
@@ -42,22 +44,28 @@ void XVector::push_back(int x)
     if (fin_vec == nullptr)
     {
         *fin = new int[size_vec];
-        fin_vec = *fin + (size_vec-1);
+        fin_vec = *fin + size_vec/2;
         ini_vec = fin_vec;
         *fin_vec = x;
+        num_vec++;
         size++;
     }
     else if (fin_vec == *fin+size_vec-1  )
     {
-        if (*fin == *map+size_map-1)
+        if (fin == map+size_map-1)
         {
-            return;
+            expand();
         }
-        fin++;
-        *fin = new int[size_vec];
-        fin_vec = *fin;
-        *fin_vec = x;
-        size++;
+        
+        
+            fin++;
+            *fin = new int[size_vec];
+            fin_vec = *fin;
+            *fin_vec = x;
+            size++;
+            num_vec++;
+
+        
     }
     else
     {
@@ -76,6 +84,7 @@ void XVector::push_front(int x)
         fin_vec = ini_vec;
         *ini_vec = x;
         size++;
+        num_vec++;
     }
     else if (ini_vec == *ini)
     {
@@ -83,11 +92,14 @@ void XVector::push_front(int x)
         {
             expand();
         }
+      
         ini--;
         *ini = new int[size_vec];
         ini_vec = *ini + size_vec - 1;
         *ini_vec = x;
         size++;
+        num_vec++;
+        
     }
     else
     {
@@ -100,6 +112,21 @@ void XVector::push_front(int x)
 
 void XVector::expand()
 {
+    
+    int** newmap = new int*[size_map * 2];
+    int** i = newmap + num_vec - 1;
+    int** j = ini;
+    ini = i;
+
+    while ( j <= fin)
+    {
+        *i = *j;
+        i++;
+        j++;
+    }
+    fin = i - 1;
+    size_map = size_map * 2;
+    map = newmap;
 
 }
 
@@ -122,14 +149,13 @@ int main()
     //no modificar esta función main
     XVector v(4, 3);
     v.push_back(3); v.push_back(8); v.push_back(1);
-    v.push_back(4); v.push_back(9); v.push_back(6);
-    v.push_back(7);
+    v.push_back(4); v.push_back(9); 
     print(&v);
-   /* v.push_front(5); v.push_front(2);
+    v.push_front(5); v.push_front(2);
     print(&v);
     v.push_front(11); v.push_front(17);
     v.push_back(22);
     print(&v);
     v.push_front(33); v.push_back(77);
-    print(&v);*/
+    print(&v);
 }

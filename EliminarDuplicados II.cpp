@@ -55,7 +55,25 @@ bool FL::pop_front(int& v)
 
 Node* FL::eliminarduplicados(Node*& head)
 {
+	Node** pos = &head;
+	Node* sig = new Node(-1);
+	for (; *pos && (*pos)->next;) {
+		if ((*pos)->v == (*pos)->next->v)
+		{
+			sig->next = *pos;
+			*pos = (*pos)->next->next;
+			while ( *pos && (*pos)->v == sig->next->v )
+			{
+				*pos = (*pos)->next;
 
+			}
+
+		}
+		else
+		{
+			pos = &(*pos)->next;
+		}
+	}
 
 
 	return head;

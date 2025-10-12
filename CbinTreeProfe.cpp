@@ -39,7 +39,7 @@ bool ArbolBinario::find(int x, Node**& pos)
 	pos = &tail;
 	while (*pos != nullptr && (*pos)->x != x)
 	{
-		if ((*pos)->x < x)
+		if ((*pos)->x > x)
 		{
 			pos = &(*pos)->izq;
 		}

@@ -14,6 +14,8 @@ private:
 };
 int piedra::ultima(vector<int>& stones)
 {
+	//mejor manera de agregar elementos a la cola de prioridad.
+	// std::priority_queue<int> pq(stones.begin(),stones.end());
     std::priority_queue<int> pq;
     for (int n : stones)
     {

@@ -26,6 +26,18 @@ int piedra::kele(vector<int>& nums, int k)
         cont++;
     }
     return mayor;
+
+
+        //std::priority_queue<int, std::vector<int>, std::greater<int>> minH(nums.begin(), nums.begin()+k);
+    //for (int i = k; i < minH.size(); i++)
+    //{
+    //    if (nums[i] > minH.top())
+    //    {
+    //        minH.pop();
+    //        minH.push(nums[i]);
+    //    }
+    //}
+    //return minH.top();
 }
 
 

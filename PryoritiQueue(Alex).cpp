@@ -9,10 +9,10 @@ public:
 	std::vector<int> max;
 	comp comparator;
 	void push(T x);
+	void pop();
 	void print();
 
-	auto begin() { return max.begin(); }
-	auto end() { return max.end(); }
+
 
 
 private:
@@ -57,13 +57,52 @@ void Heap<T,comp>::push(T x)
 }
 
 template<class T, class comp>
+void Heap<T, comp>::pop()
+{
+	int tam = max.size();
+	max[0] = max[tam-1];
+	max.pop_back();
+	tam--;
+	int ini = 0;
+	while (true)
+	{
+		int izq = 2 * ini + 1;
+		int der = 2 * ini + 2;
+		int cam = ini;
+		if (izq < tam && max[izq] > max[cam])
+		{
+			cam = izq;
+		}
+		if (der< tam && max[der] > max[cam])
+		{
+			cam = der;
+		}
+		if (cam != ini)
+		{
+			swap(max[ini],max[cam]);
+			ini = cam;
+		}
+		else
+		{
+			break;
+		}
+
+	}
+
+}
+
+template<class T, class comp>
 void Heap<T,comp>::print()
 {
+	for (int elem: max)
+	{
+		cout << elem << " ";
+	}
 }
 
 
 int main() {
-	Heap<int ,des<int>> max;
+	Heap<int ,asc<int>> max;
 	max.push(1);
 	max.push(2);
 	max.push(3);
@@ -74,9 +113,9 @@ int main() {
 	max.push(8);
 	max.push(9);
 	max.push(10);
-	for (int ele: max)
-	{
-		cout << ele << " ";
-	}
+	max.print();
+	std::cout << endl;
+	max.pop();
+	max.print();
 
 }

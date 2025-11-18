@@ -31,6 +31,8 @@ public:
     void Print();
 private:
     bool Find(int x, CBinNode**& p);
+    bool Find2(int x, CBinNode**& p , std::vector<CBinNode*>& vec);
+    int altura(CBinNode* root);
     CBinNode** Rep(CBinNode** p);
     void InOrder(CBinNode* x);
     CBinNode* root;
@@ -55,6 +57,28 @@ bool CAvlTree::Find(int x, CBinNode**& p)
     return *p != 0;
 }
 
+bool CAvlTree::Find2(int x, CBinNode**& p, std::vector<CBinNode*>& vec)
+{
+    p = &root;
+    for ( ; *p && (*p)->value != x ; p = &(*p)->nodes[(*p)->value < x])
+    {
+        vec.push_back(*p);
+    }
+    return *p != 0;
+}
+
+int CAvlTree::altura(CBinNode* root)
+{
+    if (!root)
+    {
+        return 0;
+    }
+    int der = root->nodes[1] ? root->nodes[1]->height : 0;
+    int izq = root->nodes[0] ? root->nodes[0]->height : 0;
+    root->height = 1 + max(der, izq);
+    return root->height;
+}
+
 bool CAvlTree::InsertH(int x, unsigned int h)
 {
     // No modificar ni usar esta función InsertH
@@ -68,13 +92,16 @@ bool CAvlTree::InsertH(int x, unsigned int h)
 bool CAvlTree::Insert(int x)
 {
     CBinNode** p;
-    if (Find(x, p)) return 0;
-    *p = new CBinNode(x);
     std::vector<CBinNode*> vec;
+
+    if (Find2(x, p, vec)) return 0;
+    *p = new CBinNode(x);
     vec.push_back(*p);
     while (!vec.empty())
     {
-
+        CBinNode* back = vec.back();
+        vec.pop_back();
+        altura(back);
     }
     return 1;
 }

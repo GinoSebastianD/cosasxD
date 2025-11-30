@@ -21,6 +21,7 @@ void XMayores(int heap[], int size, int x)
         col.pop();
 
         int izq = HijoIzq(idx);
+        
         if (izq < size)
         {
             col.push({ heap[izq],izq });

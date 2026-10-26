@@ -1,6 +1,15 @@
 #include <iostream>
 using namespace std;
 
+
+
+
+
+
+
+
+
+
 struct Node {
     int sum;
     int start_index, final_index;
